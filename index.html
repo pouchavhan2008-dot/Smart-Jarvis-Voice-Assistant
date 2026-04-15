@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jarvis AI</title>
+  <title>IRON MAN JARVIS</title>
+  <style>
+    body {
+      background: black;
+      color: red;
+      text-align: center;
+      font-family: Arial;
+      margin-top: 80px;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: red;
+      text-shadow: 0 0 20px red;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 
-<body style="text-align:center; font-family:Arial; margin-top:100px;">
+<body>
 
-  <h1>🤖 Hello Boss, I am Jarvis</h1>
-  <p>Voice Assistant Ready</p>
+<h1>🤖 JARVIS ONLINE</h1>
+<p>Hindi AI Assistant Ready</p>
 
-  <button onclick="startJarvis()" style="padding:10px 20px; font-size:18px;">
-    🎤 Start Jarvis
-  </button>
+<button onclick="startJarvis()">🎤 Talk to Jarvis</button>
 
 <script>
 function speak(text) {
@@ -22,14 +45,14 @@ function speak(text) {
   window.speechSynthesis.speak(msg);
 }
 
-// Auto welcome voice
+// Welcome voice
 window.onload = function () {
   setTimeout(() => {
     speak("Hello Boss, main Jarvis hoon. Aapki kya madad kar sakta hoon?");
   }, 1000);
 };
 
-// Voice command system
+// Voice system
 function startJarvis() {
   let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "hi-IN";
@@ -38,18 +61,29 @@ function startJarvis() {
 
   recognition.onresult = function(event) {
     let command = event.results[0][0].transcript.toLowerCase();
+
     console.log(command);
 
     if (command.includes("hi jarvis") || command.includes("hello jarvis")) {
       speak("Hello Boss, main aapki kya madad kar sakta hoon?");
     }
 
-    else if (command.includes("kaisa hai aaj ka din")) {
-      speak("Aaj ka din bahut achha hai boss, aap kaise ho?");
+    else if (command.includes("tum kaun ho")) {
+      speak("Main aapka Iron Man style Jarvis hoon");
     }
 
-    else if (command.includes("tum kaun ho")) {
-      speak("Main aapka personal Jarvis hoon, smart AI assistant");
+    else if (command.includes("kaisa hai aaj ka din")) {
+      speak("Aaj ka din bahut acha hai boss");
+    }
+
+    else if (command.includes("youtube kholo")) {
+      speak("YouTube khol raha hoon boss");
+      window.open("https://youtube.com");
+    }
+
+    else if (command.includes("google kholo")) {
+      speak("Google khol raha hoon boss");
+      window.open("https://google.com");
     }
 
     else {
