@@ -3,8 +3,63 @@
 <head>
   <title>Jarvis AI</title>
 </head>
-<body>
-  <h1>Hello, I am Jarvis 🤖</h1>
+
+<body style="text-align:center; font-family:Arial; margin-top:100px;">
+
+  <h1>🤖 Hello Boss, I am Jarvis</h1>
   <p>Voice Assistant Ready</p>
+
+  <button onclick="startJarvis()" style="padding:10px 20px; font-size:18px;">
+    🎤 Start Jarvis
+  </button>
+
+<script>
+function speak(text) {
+  let msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "hi-IN";
+  msg.rate = 1;
+  msg.volume = 1;
+  window.speechSynthesis.speak(msg);
+}
+
+// Auto welcome voice
+window.onload = function () {
+  setTimeout(() => {
+    speak("Hello Boss, main Jarvis hoon. Aapki kya madad kar sakta hoon?");
+  }, 1000);
+};
+
+// Voice command system
+function startJarvis() {
+  let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = "hi-IN";
+
+  speak("Main sun raha hoon boss");
+
+  recognition.onresult = function(event) {
+    let command = event.results[0][0].transcript.toLowerCase();
+    console.log(command);
+
+    if (command.includes("hi jarvis") || command.includes("hello jarvis")) {
+      speak("Hello Boss, main aapki kya madad kar sakta hoon?");
+    }
+
+    else if (command.includes("kaisa hai aaj ka din")) {
+      speak("Aaj ka din bahut achha hai boss, aap kaise ho?");
+    }
+
+    else if (command.includes("tum kaun ho")) {
+      speak("Main aapka personal Jarvis hoon, smart AI assistant");
+    }
+
+    else {
+      speak("Sorry boss, main ye samajh nahi paaya");
+    }
+  };
+
+  recognition.start();
+}
+</script>
+
 </body>
 </html>
