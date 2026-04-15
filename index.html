@@ -1,59 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IRON MAN JARVIS</title>
+  <title>JARVIS ULTIMATE AI</title>
   <style>
     body {
-      background: black;
+      background: radial-gradient(circle, #000000, #1a0000);
       color: red;
       text-align: center;
       font-family: Arial;
-      margin-top: 80px;
+      margin-top: 70px;
     }
 
     h1 {
-      font-size: 40px;
-      color: red;
-      text-shadow: 0 0 20px red;
+      font-size: 45px;
+      text-shadow: 0 0 25px red;
     }
 
     button {
-      padding: 15px 25px;
+      padding: 15px 30px;
       font-size: 18px;
       background: red;
-      color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      color: white;
       margin-top: 20px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 10px;
+      width: 60%;
+      margin-top: 20px;
+      font-size: 16px;
     }
   </style>
 </head>
 
 <body>
 
-<h1>🤖 JARVIS ONLINE</h1>
-<p>Hindi AI Assistant Ready</p>
+<h1>🤖 JARVIS ULTIMATE AI</h1>
 
-<button onclick="startJarvis()">🎤 Talk to Jarvis</button>
+<p>Iron Man Level Assistant</p>
+
+<input id="userInput" placeholder="Ask Jarvis..." />
+<br>
+
+<button onclick="askAI()">Ask AI</button>
+<button onclick="startVoice()">🎤 Voice Mode</button>
+
+<p id="output"></p>
 
 <script>
+
 function speak(text) {
   let msg = new SpeechSynthesisUtterance(text);
   msg.lang = "hi-IN";
   msg.rate = 1;
-  msg.volume = 1;
   window.speechSynthesis.speak(msg);
 }
 
-// Welcome voice
-window.onload = function () {
-  setTimeout(() => {
-    speak("Hello Boss, main Jarvis hoon. Aapki kya madad kar sakta hoon?");
-  }, 1000);
-};
+// Fake AI fallback (replace with API later)
+async function askAI() {
+  let text = document.getElementById("userInput").value;
+
+  let reply = "Boss, main abhi AI connect nahi hoon, but main aapki madad kar sakta hoon";
+
+  if (text.includes("tum kaun ho")) {
+    reply = "Main aapka Iron Man style Jarvis hoon";
+  }
+
+  if (text.includes("youtube kholo")) {
+    window.open("https://youtube.com");
+    reply = "YouTube khol diya boss";
+  }
+
+  document.getElementById("output").innerText = reply;
+  speak(reply);
+}
 
 // Voice system
-function startJarvis() {
+function startVoice() {
   let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "hi-IN";
 
@@ -62,37 +88,20 @@ function startJarvis() {
   recognition.onresult = function(event) {
     let command = event.results[0][0].transcript.toLowerCase();
 
-    console.log(command);
+    document.getElementById("userInput").value = command;
 
-    if (command.includes("hi jarvis") || command.includes("hello jarvis")) {
-      speak("Hello Boss, main aapki kya madad kar sakta hoon?");
-    }
-
-    else if (command.includes("tum kaun ho")) {
-      speak("Main aapka Iron Man style Jarvis hoon");
-    }
-
-    else if (command.includes("kaisa hai aaj ka din")) {
-      speak("Aaj ka din bahut acha hai boss");
-    }
-
-    else if (command.includes("youtube kholo")) {
-      speak("YouTube khol raha hoon boss");
-      window.open("https://youtube.com");
-    }
-
-    else if (command.includes("google kholo")) {
-      speak("Google khol raha hoon boss");
-      window.open("https://google.com");
-    }
-
-    else {
-      speak("Sorry boss, main ye samajh nahi paaya");
-    }
+    askAI();
   };
 
   recognition.start();
 }
+
+window.onload = function() {
+  setTimeout(() => {
+    speak("Hello Boss, Jarvis Ultimate AI ready hai");
+  }, 1000);
+}
+
 </script>
 
 </body>
